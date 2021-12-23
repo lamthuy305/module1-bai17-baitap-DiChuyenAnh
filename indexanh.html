@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<script src="anh.js"></script>
+<body>
+
+<p>Canvas:</p>
+<canvas id="myCanvas" width="500" height="500" style="border:1px solid #d3d3d3;">
+
+</canvas>
+
+<script>
+
+    let canvas = document.getElementById("myCanvas");
+    let ctx = canvas.getContext("2d");
+
+
+    let x = 10;
+    let y = 10;
+    let draw1 = new DrawImg(x,y,"https://www.w3schools.com/tags/img_the_scream.jpg")
+
+    function clear() {
+        ctx.clearRect(0, 0, 500, 500);
+    }
+
+    function move(event) {
+        switch (event.keyCode) {
+            case 37: {
+                draw1.moveLeft()
+                break;
+            }
+            case 39 : {
+                draw1.moveRight()
+                break;
+            }
+            case 38 : {
+                draw1.moveUp()
+                break;
+            }
+            case 40 : {
+                draw1.moveDown()
+                break;
+            }
+        }
+        clear();
+        draw1.drawImage(ctx)
+    }
+    draw1.drawImage(ctx)
+
+    document.addEventListener("keydown", move);
+
+
+</script>
+
+</body>
+</html>

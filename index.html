@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="dichuyen.js"></script>
+</head>
+<body>
+<canvas height="700" id="myCanvas" style="border: solid 1px" width="700"></canvas>
+<script>
+
+    function getRandomHex() {
+        return Math.floor(Math.random() * 255);
+    }
+
+    function getRandomColor() {
+        let red = getRandomHex();
+        let green = getRandomHex();
+        let blue = getRandomHex();
+        return "rgb(" + red + "," + blue + "," + green + ")";
+    }
+
+    let canvas = document.getElementById("myCanvas");
+    let ctx = canvas.getContext('2d');
+
+
+    function drawCircle() {
+
+        ctx.beginPath();
+        ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
+        ctx.fillStyle = circle.color;
+        ctx.fill();
+    }
+
+    function drawMultiCircle() {
+        clear();
+        for (let i = 0; i < 10; i++) {
+            drawCircle();
+        }
+    }
+
+    let x = Math.random() * 700;
+    let y = Math.random() * 700;
+    let color = getRandomColor();
+    let circle = new Circle(x, y, 30, color);
+    drawCircle();
+
+    // drawMultiCircle();
+
+    // let circle1 = new Circle(200, 10, 40, 'red');
+
+
+    // function moveCircle() {
+    //     circle1.y += 50;
+    //     clear();
+    //     ctx.beginPath();
+    //     ctx.arc(circle1.x, circle1.y, circle1.radius, 0, 2 * Math.PI);
+    //     ctx.fillStyle = circle1.color;
+    //     ctx.fill();
+    // }
+    //
+    function clear() {
+        ctx.clearRect(0, 0, 1368, 768)
+    }
+
+    //
+    // setInterval(moveCircle, 1000)
+    function move(event) {
+        switch (event.keyCode) {
+            case 37: {
+                circle.moveLeft();
+                break;
+            }
+            case 39 : {
+                circle.moveRight()
+                break;
+            }
+            case 38 : {
+                circle.moveUp()
+                break;
+            }
+            case 40 : {
+                circle.moveDown()
+                break;
+            }
+        }
+        clear();
+        drawCircle()
+    }
+    document.addEventListener("keydown", move);
+</script>
+</body>
+</html>
